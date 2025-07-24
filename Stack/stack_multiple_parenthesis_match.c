@@ -43,7 +43,7 @@ void isEmpty(struct stack* s){
         printf("All parenthesis matched!");
     }
     else{
-        printf("Parenthesis %c not matched!",s->array[s->top]); // great suggestion from chatGPT as i was passing char_data from calling but if s->top is -1 then there is no data so instead of this the data will be handeled here properly
+        printf("Parenthesis %c not matched!",s->array[s->top]); //i was passing char_data from calling but if s->top is -1 then there is no data so instead of this the data will be handeled here properly
     }
 }
 int main()

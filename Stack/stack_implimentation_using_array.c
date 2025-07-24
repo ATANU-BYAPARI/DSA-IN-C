@@ -30,7 +30,7 @@ int main()
 {
     struct stack *s;
     s->size_of_array = 50;
-    s->top = -1;                                                  // means for now there is no element in array
+    s->top = -1;// means for now there is no element in array
     s->array = (int *)malloc((s->size_of_array) * (sizeof(int))); // memory allocating for array
 
     // check if the stack is empty or not
