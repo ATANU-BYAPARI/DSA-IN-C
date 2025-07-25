@@ -1,4 +1,4 @@
-// Adaptive bubble sorting algorithm...
+// Adaptive bubble sorting algorithm for ascending order...
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -6,7 +6,7 @@ int main()
 {
     int arr[] = {1, 2, 3, 4, 5, 6, 7, 8};
     int size = 8;
-    bool check;  // check point
+    bool check;  // checkpoint
     // array before sorting...
     for (int idx = 0; idx < size; idx++)
     {
@@ -17,7 +17,7 @@ int main()
     for (int i = 0; i < size - 1; i++)
     {
         printf("Performing %d iteration...\n",i+1);
-        check=true; // initialization the check point
+        check=true; // initialization the checkpoint
         for (int j = 0; j < size - 1 - i; j++)
         {
             if (arr[j] > arr[j + 1])
@@ -28,7 +28,7 @@ int main()
                 check=false; //updating check point if there is any swapping
             }
         }
-        if(check==true){ // checking check point if matched, break and get out of the loop
+        if(check==true){ // checking the checkpoint if matched, break and get out of the loop
             break;
         }
     }

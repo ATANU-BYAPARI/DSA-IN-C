@@ -18,7 +18,7 @@ int main()
         printf("Performing %d iteration...\n", i + 1);
         for (int j = 0; j < size - 1 - i; j++)
         { // loop will run upto size-1-i, bcz after each iteration the highest number will be at the last index
-            if (arr[j] > arr[j + 1])
+            if (arr[j] > arr[j + 1]) // for descending order put arr[j] < arr[j+1]
             {
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
