@@ -1,0 +1,49 @@
+// preorder traversal===> first root-> then left branch-> then right branch
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+int main()
+{
+    // node creation and updating their data fields
+    struct node *node0 = (struct node *)malloc(sizeof(struct node));
+    node0->data = 0;
+    struct node *node1 = (struct node *)malloc(sizeof(struct node));
+    node1->data = 1;
+    struct node *node2 = (struct node *)malloc(sizeof(struct node));
+    node2->data = 2;
+    struct node *node3 = (struct node *)malloc(sizeof(struct node));
+    node3->data = 3;
+
+    // pointing left and right pointers with other nodes
+    node0->left = node1;
+    node0->right = node2;
+    node1->left = node3;
+    node1->right = NULL;
+    node2->left = node2->right = NULL;
+    node3->left = node3->right = NULL;
+    // the tree will look like (below...)
+    //        n0
+    //      /   \
+    //    n1     n2
+    //   /
+    // n3
+    void preorder_traversal(struct node *); //function prototype declaration
+    preorder_traversal(node0);
+    return 0;
+}
+void preorder_traversal(struct node *node0)
+{
+    if (node0!= NULL)
+    {
+    printf("%d ", node0->data);
+    preorder_traversal(node0->left);
+    preorder_traversal(node0->right);
+    } // prints 0 1 3 2
+    return;
+}
