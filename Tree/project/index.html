@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simplified Property Listing Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="form" novalidate>
+        <button type="button" class="back-btn" onclick="goBack()">×</button>
+        <h2>List Your Property</h2>
+
+        <!-- Property Name Field -->
+        <div class="form-group">
+            <label for="name">Property Name <span style="color:var(--error)">*</span></label>
+            <input id="name" name="name" type="text" required placeholder="e.g, Cozy Cottage">
+            <div class="error-message"></div>
+        </div>
+
+        <!-- One-Line Bio Field -->
+        <div class="form-group">
+            <label for="oneLineBio">One-Line Bio <span style="color:var(--error)">*</span></label>
+            <input id="oneLineBio" name="oneLineBio" type="text" maxlength="40" required
+                placeholder="Mess with good food & Wifi">
+            <div id="oneLineBioCounter" class="char-counter">0/40</div>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- Property Type -->
+        <div class="form-group">
+            <label for="type">Property Type <span style="color:var(--error)">*</span></label>
+            <select id="type" name="type" required>
+                <option value="">Select a Type</option>
+                <option>House</option>
+                <option>PG</option>
+                <option>Mess</option>
+                <option>Hostel</option>
+            </select>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- BHK Type for House -->
+        <div id="bhkDiv" class="form-group hidden">
+            <label for="bhk">BHK Type <span style="color:var(--error)">*</span></label>
+            <select id="bhk" name="bhk" required>
+                <option value="">Select BHK</option>
+                <option>1 BHK</option>
+                <option>2 BHK</option>
+                <option>3 BHK</option>
+                <option>4 BHK</option>
+            </select>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- Food Included for PG/Mess/Hostel -->
+        <div id="foodIncludedDiv" class="form-group hidden">
+            <label for="foodIncluded">Food Included <span style="color:var(--error)">*</span></label>
+            <select id="foodIncluded" name="foodIncluded" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- Meal Options for Food Included -->
+        <div id="mealOptions" class="form-group hidden">
+            <label>Meal Options (select at least one) <span style="color:var(--error)">*</span></label>
+            <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="meals" value="Breakfast"> Breakfast</label>
+                <label class="checkbox-label"><input type="checkbox" name="meals" value="Lunch"> Lunch</label>
+                <label class="checkbox-label"><input type="checkbox" name="meals" value="Dinner"> Dinner</label>
+            </div>
+            <div id="mealError" class="error-message"></div>
+        </div>
+
+        <!-- Rooms Available For PG/Mess/Hostel -->
+        <div id="roomsAvailableDiv" class="form-group hidden">
+            <label>Rooms Available For (select at least one) <span style="color:var(--error)">*</span></label>
+            <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="roomsAvailable" value="1 Person"> 1 Person</label>
+                <label class="checkbox-label"><input type="checkbox" name="roomsAvailable" value="2 Person"> 2 Person</label>
+                <label class="checkbox-label"><input type="checkbox" name="roomsAvailable" value="3 Person"> 3 Person</label>
+                <label class="checkbox-label"><input type="checkbox" name="roomsAvailable" value="3+ Person"> 3+ Person</label>
+            </div>
+            <div id="roomsAvailableError" class="error-message"></div>
+        </div>
+
+        <!-- Suitable For -->
+        <div class="form-group">
+            <label for="suitableFor">Suitable For <span style="color:var(--error)">*</span></label>
+            <select id="suitableFor" name="suitableFor" required>
+                <option value="">Select</option>
+                <option>Girls</option>
+                <option>Boys</option>
+                <option>Family</option>
+                <option>Both (Girls & Boys)</option>
+            </select>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- Image Uploads -->
+        <div class="form-group">
+            <label for="outerImage">Outer View Image <span style="color:var(--error)">*</span></label>
+            <input type="file" id="outerImage" name="outerImage" accept="image/*" required>
+            <div id="imagePreviewOuter"></div>
+            <div class="error-message"></div>
+        </div>
+        <div class="form-group">
+            <label for="innerImage">Inner View Image <span style="color:var(--error)">*</span></label>
+            <input type="file" id="innerImage" name="innerImage" accept="image/*" required>
+            <div id="imagePreviewInner"></div>
+            <div class="error-message"></div>
+        </div>
+        <div class="form-group">
+            <label for="moreImages">Additional Images (min 2) <span style="color:var(--error)">*</span></label>
+            <input type="file" id="moreImages" name="moreImages" multiple accept="image/*" required>
+            <div id="imagePreviewMore"></div>
+            <div id="moreImagesError" class="error-message"></div>
+        </div>
+
+        <!-- Food Menu Image (Optional) -->
+        <div class="form-group">
+            <label for="foodMenuImage">Food Menu Image <span style="color:var(--text-light)">(optional)</span></label>
+            <input type="file" id="foodMenuImage" name="foodMenuImage" accept="image/*">
+            <div id="imagePreviewFoodMenu"></div>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- Nearby Facilities -->
+        <fieldset>
+            <legend>Nearby Facilities <span style="color:var(--text-light)">(optional)</span></legend>
+            <div class="grid col2">
+                <div class="form-group">
+                    <label for="facility1">Facility 1</label>
+                    <input id="facility1" name="facility1" placeholder="e.g., Supermarket">
+                    <div class="error-message"></div>
+                </div>
+                <div class="facility-container">
+                    <label for="facility1Distance">Distance</label>
+                    <input id="facility1Distance" name="facility1Distance" type="number" min="0" step="0.1"
+                        placeholder="e.g., 1.5">
+                    <span class="facility-suffix">km</span>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="facility2">Facility 2</label>
+                    <input id="facility2" name="facility2" placeholder="e.g., Bus Stop">
+                    <div class="error-message"></div>
+                </div>
+                <div class="facility-container">
+                    <label for="facility2Distance">Distance</label>
+                    <input id="facility2Distance" name="facility2Distance" type="number" min="0" step="0.1"
+                        placeholder="e.g., 0.8">
+                    <span class="facility-suffix">km</span>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="facility3">Facility 3</label>
+                    <input id="facility3" name="facility3" placeholder="e.g., Hospital">
+                    <div class="error-message"></div>
+                </div>
+                <div class="facility-container">
+                    <label for="facility3Distance">Distance</label>
+                    <input id="facility3Distance" name="facility3Distance" type="number" min="0" step="0.1"
+                        placeholder="e.g., 2.0">
+                    <span class="facility-suffix">km</span>
+                    <div class="error-message"></div>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Address -->
+        <fieldset>
+            <legend>Address</legend>
+            <div class="grid col2">
+                <div class="form-group">
+                    <label for="area">Area/Locality <span style="color:var(--error)">*</span></label>
+                    <input id="area" name="area" required>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="district">District <span style="color:var(--error)">*</span></label>
+                    <input id="district" name="district" required>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="city">City <span style="color:var(--error)">*</span></label>
+                    <input id="city" name="city" required>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="pin">Pin Code <span style="color:var(--error)">*</span></label>
+                    <input id="pin" name="pin" required pattern="\d{6}" placeholder="6 digits">
+                    <div class="error-message"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="landmark">Landmark <span style="color:var(--text-light)">(optional)</span></label>
+                <input id="landmark" name="landmark">
+            </div>
+            <div class="form-group">
+                <label for="locationLink">Location Link <span style="color:var(--text-light)">(optional)</span></label>
+                <input id="locationLink" name="locationLink" type="url" placeholder="e.g., https://maps.google.com/...">
+                <div class="error-message"></div>
+            </div>
+        </fieldset>
+
+        <!-- Rent Details -->
+        <fieldset>
+            <legend>Rent Details</legend>
+            <div class="grid col2">
+                <div class="pricing-container">
+                    <label for="monthlyRent">Monthly Rent <span style="color:var(--error)">*</span></label>
+                    <input id="monthlyRent" name="monthlyRent" type="number" min="1" required>
+                    <span class="pricing-suffix">/month</span>
+                    <div class="error-message"></div>
+                </div>
+                <div></div>
+            </div>
+        </fieldset>
+
+        <!-- Owner Name -->
+        <div class="form-group">
+            <label for="owner">Owner Name <span style="color:var(--error)">*</span></label>
+            <input id="owner" name="owner" type="text" required>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- Property Bio -->
+        <div class="form-group">
+            <label for="bio">Property Bio <span style="color:var(--error)">*</span></label>
+            <textarea id="bio" name="bio" maxlength="500" required placeholder="Max 500 characters"></textarea>
+            <div id="charCounter" class="char-counter">500 characters remaining</div>
+            <div class="error-message"></div>
+        </div>
+
+        <!-- Features -->
+        <div class="form-group">
+            <label>Features (select minimum 3) <span style="color:var(--error)">*</span></label>
+            <div class="checkbox-group" id="features">
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Wi-Fi"> Wi-Fi</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Power Backup"> Power Backup</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Car Parking"> Car Parking</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Swimming Pool"> Swimming Pool</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Gym Access"> Gym Access</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="CCTV"> CCTV</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Housekeeping"> Housekeeping</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Laundry Service"> Laundry Service</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Meal Service"> Meal Service</label>
+                <label class="checkbox-label"><input type="checkbox" name="features" value="Water Supply"> Water Supply</label>
+            </div>
+            <div id="featureError" class="error-message"></div>
+        </div>
+
+        <!-- Contact -->
+        <fieldset>
+            <legend>Contact</legend>
+            <div class="grid col2">
+                <div class="form-group">
+                    <label for="contact_phone">Contact Phone <span style="color:var(--error)">*</span></label>
+                    <input id="contact_phone" name="contact_phone" type="tel" required pattern="\d{10,13}"
+                        placeholder="10 digit phone number">
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="contact_email">Contact Email <span style="color:var(--error)">*</span></label>
+                    <input id="contact_email" name="contact_email" type="email" required>
+                    <div class="error-message"></div>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Subscription Plan -->
+        <div class="form-group">
+            <div class="plan-container">
+                <label class="plan-label">Subscription Plan <span style="color:var(--error)">*</span></label>
+                <button type="button" id="choosePlanBtn" class="plan-button">Choose a Plan</button>
+                <span id="planStatus" class="plan-status pending">Pending</span>
+            </div>
+            <div id="planError" class="error-message"></div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="button">Submit Listing</button>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>

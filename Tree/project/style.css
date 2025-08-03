@@ -1,0 +1,331 @@
+:root {
+    --primary: #0032bb;
+    --accent: #3b82f6;
+    --text-dark: #2d303b;
+    --text-light: #6b7280;
+    --border: #d1d5db;
+    --error: #dc2626;
+    --success: #10b981;
+    --radius: 8px;
+    --gap: 1.25rem;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --background: #f1f5f9;
+    --form-bg: #ffffff;
+    --font-size-base: 1.0rem;
+    --padding-base: 0.9rem;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--background), #e2e8f0);
+    padding: clamp(1rem, 4vw, 2rem);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    background: var(--form-bg);
+    padding: clamp(1.25rem, 3.5vw, 2.5rem);
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 900px;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    top: 0.0rem;
+    left: 0.5em;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.back-btn:hover {
+    color: var(--text-dark);
+}
+
+h2 {
+    text-align: center;
+    color: var(--primary);
+    font-size: 1.75rem;
+    margin-bottom: 1.4rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.grid {
+    display: grid;
+    gap: var(--gap);
+}
+
+.col2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-weight: 400;
+    font-size: var(--font-size-base);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: var(--padding-base);
+    font-size: var(--font-size-base);
+    color: var(--text-dark);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fafafa;
+    transition: border 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
+    background: #fff;
+}
+
+input.invalid, select.invalid, textarea.invalid {
+    border-color: var(--error);
+}
+
+.error-message {
+    color: var(--error);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    min-height: 0.1rem;
+}
+
+.pricing-container, .facility-container {
+    position: relative;
+}
+
+.pricing-container input, .facility-container input[type="number"] {
+    padding-right: 4.5rem;
+}
+
+.pricing-suffix, .facility-suffix {
+    position: absolute;
+    top: 50%;
+    right: 0.9rem;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    pointer-events: none;
+    font-size: 0.9rem;
+}
+
+#imagePreviewOuter, #imagePreviewInner, #imagePreviewMore, #imagePreviewFoodMenu {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-top: 0.9rem;
+}
+
+.img-preview-container {
+    position: relative;
+}
+
+.preview-img {
+    width: clamp(80px, 18vw, 90px);
+    height: clamp(60px, 14vw, 70px);
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--error);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+fieldset {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: clamp(0.9rem, 2.5vw, 1.25rem);
+    background: #fdfdfd;
+    margin-top: var(--gap);
+    margin-bottom: 0.9rem;
+}
+
+legend {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    padding: 0 0.5rem;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.9rem;
+    padding: 0.9rem;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    align-content: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-base);
+    color: var(--text-dark);
+}
+
+input[type="checkbox"] {
+    width: 1.3rem;
+    height: 1.3rem;
+    accent-color: var(--accent);
+    flex: none;
+}
+
+.button {
+    display: block;
+    margin: 1.75rem auto 0;
+    padding: var(--padding-base) clamp(1.75rem, 3.5vw, 2.25rem);
+    background: var(--primary);
+    border: none;
+    border-radius: var(--radius);
+    color: #fff;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button:hover:not(:disabled) {
+    background: var(--accent);
+    transform: translateY(-3px);
+}
+
+.char-counter {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.plan-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--gap);
+}
+
+.plan-label {
+    color: var(--text-dark);
+    font-weight: 400;
+    font-size: var(--font-size-base);
+    margin-right: 0.5rem;
+}
+
+.plan-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    background: var(--primary);
+    border: none;
+    border-radius: var(--radius);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.plan-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.plan-button:hover:not(:disabled) {
+    background: var(--accent);
+}
+
+.plan-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.plan-status.done {
+    color: var(--success);
+    font-weight: bold;
+}
+
+.plan-status.pending {
+    color: var(--error);
+}
+
+@media(max-width: 768px) {
+    .col2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 480px) {
+    form {
+        padding: clamp(0.9rem, 2.5vw, 1.25rem);
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-container {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .plan-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .back-btn {
+        font-size: 1.3rem;
+        padding: 0.4rem;
+    }
+}
