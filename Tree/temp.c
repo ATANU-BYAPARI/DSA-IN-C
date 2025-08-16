@@ -1,4 +1,4 @@
-// balance factor= height of right subtree- height of left subtree
+// balance factor = height of left subtree - height of right subtree
 // bf can be -1 0 or 1 only
 // ll rotation
 // rr rotation
@@ -14,10 +14,12 @@ struct node
     struct node *right;
     int height;
 };
+
 int max(int a, int b)
 {
     return a > b ? a : b;
 }
+
 int getheight(struct node *n)
 {
     if (n == NULL)
@@ -26,6 +28,7 @@ int getheight(struct node *n)
     }
     return n->height;
 }
+
 struct node *createnode(int key)
 {
     struct node *node = (struct node *)malloc(sizeof(struct node));
@@ -33,9 +36,9 @@ struct node *createnode(int key)
     node->right = NULL;
     node->key = key;
     node->height = 1;
-
     return node;
 }
+
 int getbalancefactor(struct node *n)
 {
     if (n == NULL)
@@ -44,6 +47,7 @@ int getbalancefactor(struct node *n)
     }
     return getheight(n->left) - getheight(n->right);
 }
+
 struct node *rightrotate(struct node *y)
 {
     struct node *x = y->left;
@@ -51,21 +55,27 @@ struct node *rightrotate(struct node *y)
 
     x->right = y;
     y->left = t2;
-    y->height = max(getheight(y->right), getheight(y->left)) + 1;
-    x->height = max(getheight(x->right), getheight(x->left)) + 1;
+
+    y->height = max(getheight(y->left), getheight(y->right)) + 1;
+    x->height = max(getheight(x->left), getheight(x->right)) + 1;
+
     return x;
 }
+
 struct node *leftrotate(struct node *x)
 {
     struct node *y = x->right;
     struct node *t2 = y->left;
 
-    x->right = t2;
     y->left = x;
-    y->height = max(getheight(y->right), getheight(y->left)) + 1;
-    x->height = max(getheight(x->right), getheight(x->left)) + 1;
+    x->right = t2;
+
+    x->height = max(getheight(x->left), getheight(x->right)) + 1;
+    y->height = max(getheight(y->left), getheight(y->right)) + 1;
+
     return y;
 }
+
 struct node *insert(struct node *node, int key)
 {
     if (node == NULL)
@@ -80,50 +90,65 @@ struct node *insert(struct node *node, int key)
     {
         node->right = insert(node->right, key);
     }
-    return node;
-    node->height = 1 + max(getheight(node->left), getheight(node->right));
-    int bf = getbalancefactor(node);
-    // left right case
-    if (bf > 1 && key > node->right->key)
+    else
     {
-        node->left = leftrotate(node->left);
-        return rightrotate(node);
+        return node; // duplicate keys not allowed
     }
-    // left left case
+
+    // Update height of current node
+    node->height = 1 + max(getheight(node->left), getheight(node->right));
+
+    // Get balance factor
+    int bf = getbalancefactor(node);
+
+    // Left Left Case
     if (bf > 1 && key < node->left->key)
     {
         return rightrotate(node);
     }
-    // right right case
-    if (bf < -1 && key > node->left->key)
+    // Right Right Case
+    if (bf < -1 && key > node->right->key)
     {
         return leftrotate(node);
     }
-    // right left case
+    // Left Right Case
+    if (bf > 1 && key > node->left->key)
+    {
+        node->left = leftrotate(node->left);
+        return rightrotate(node);
+    }
+    // Right Left Case
     if (bf < -1 && key < node->right->key)
     {
         node->right = rightrotate(node->right);
         return leftrotate(node);
     }
+
     return node;
 }
+
 void preorder_traversal(struct node *node)
 {
-    if(node==NULL){
+    if (node == NULL)
+    {
         return;
     }
-    printf("%d ",node->key);
+    printf("%d ", node->key);
     preorder_traversal(node->left);
     preorder_traversal(node->right);
 }
-void inorder_traversal(struct node* node){
-    if(node==NULL){
+
+void inorder_traversal(struct node *node)
+{
+    if (node == NULL)
+    {
         return;
     }
     inorder_traversal(node->left);
-    printf("%d ",node->key);
+    printf("%d ", node->key);
     inorder_traversal(node->right);
 }
+
 int main()
 {
     struct node *root = NULL;
@@ -133,7 +158,14 @@ int main()
     root = insert(root, 5);
     root = insert(root, 6);
     root = insert(root, 3);
+
+    printf("Preorder: ");
     preorder_traversal(root);
+    printf("\n");
+
+    printf("Inorder: ");
     inorder_traversal(root);
+    printf("\n");
+
     return 0;
 }
